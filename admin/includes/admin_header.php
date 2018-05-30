@@ -30,7 +30,7 @@ if  (!isset($_SESSION['username'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>GTBay Admin</title>
+    <title>eBayLite Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

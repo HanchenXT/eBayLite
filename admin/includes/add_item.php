@@ -1,41 +1,29 @@
 <?php
+if(isset($_POST['submit'])){
+    $item_name         = escape($_POST['name']);
+    $item_description  = escape($_POST['item_description']);
+    $item_min_sale_price = escape($_POST['min_sale_price']);
+    $item_get_it_now_price = escape($_POST['get_it_now_price']);
+    $buy_availability  = 1;
+    $item_category_id  = escape($_POST['item_category']);
+    $item_condition    = escape($_POST['item_condition']);
+    $item_start_bidding_price = escape($_POST['start_bidding_price']);
+    $item_return_accepted= isset($_POST['return']);
 
-   if(isset($_POST['submit'])){
-            $item_name         = escape($_POST['name']);
-//            $item_user         = escape($_POST['post_user']);
-            $item_description  = escape($_POST['item_description']);
-            $item_min_sale_price= escape($_POST['min_sale_price']);
-            $item_get_it_now_price         = escape($_POST['get_it_now_price']);
-            $buy_availability  = 1;
-            $item_category_id  = escape($_POST['item_category']);
-            $item_condition    = escape($_POST['item_condition']);
-            $item_start_bidding_price = escape($_POST['start_bidding_price']);
-            $item_return_accepted= isset($_POST['return']);
-       
-            $cur_time = mysqli_fetch_row(mysqli_query($connection,"SELECT NOW()"));
-            $item_end_date     = escape(date("c", strtotime($cur_time[0]. ' + '.$_POST['days'].' days')));
-//            $item_end_hour         = escape(date('d-m-y'));
+    $cur_time = mysqli_fetch_row(mysqli_query($connection,"SELECT NOW()"));
+    $item_end_date = escape(date("c", strtotime($cur_time[0]. ' + '.$_POST['days'].' days')));
 
-       
-//        move_uploaded_file($post_image_temp, "../images/$post_image" );
-       
+    $query = "INSERT INTO `Items`(`name`,`description`,`min_sale_price`, `get_it_now_price`,`buy_availability`,`categoryID`,`condition`,`start_bidding`,`return_accepted`,`end_time`) ";
 
-      $query = "INSERT INTO `items`(`name`,`description`,`min_sale_price`, `get_it_now_price`,`buy_availability`,`categoryID`,`condition`,`start_bidding`,`return_accepted`,`end_time`) ";
-             
-      $query .= "VALUES('{$item_name}','{$item_description}','{$item_min_sale_price}','{$item_get_it_now_price}','{$buy_availability}','{$item_category_id}', '{$item_condition}', '{$item_start_bidding_price}', b'{$item_return_accepted}', '{$item_end_date}') "; 
-             
-      $create_item_query = mysqli_query($connection, $query);  
-      confirmQuery($create_item_query);
+    $query .= "VALUES('{$item_name}','{$item_description}','{$item_min_sale_price}','{$item_get_it_now_price}','{$buy_availability}','{$item_category_id}', '{$item_condition}', '{$item_start_bidding_price}', b'{$item_return_accepted}', '{$item_end_date}') "; 
 
-      $the_post_id = mysqli_insert_id($connection);
+    $create_item_query = mysqli_query($connection, $query);  
+    confirmQuery($create_item_query);
 
+    $the_post_id = mysqli_insert_id($connection);
 
-      echo "<p class='bg-success'>Item Created. <a href='items.php'>View All Items </a></p>";
-       
-
-
-   }
-
+    echo "<p class='bg-success'>Item Created. <a href='items.php'>View All Items </a></p>";
+}
 ?>
 
     <!--    <form action="" method="post" enctype="multipart/form-data">    -->
@@ -52,7 +40,7 @@
            
 <?php
            
-        $query = "SELECT * FROM category";
+        $query = "SELECT * FROM Category";
         $select_categories = mysqli_query($connection,$query);
         
         confirmQuery($select_categories);
@@ -100,7 +88,7 @@
             <select name="item_condition" id="item_condition">
            
 <?php
-        $table = 'items';
+        $table = 'Items';
         $field = 'condition';
         $query = "SHOW COLUMNS FROM {$table} WHERE Field = '{$field}'" ;
         $select_conditions = mysqli_query($connection,$query);
@@ -114,8 +102,6 @@
         }
 
 ?>
-           
-        
        </select>
 
         </div>
@@ -140,15 +126,10 @@
           </select>
             Days
             </label>
-                <!--              <input type="time" name="end_time">-->
         </div>
-
-
-
 
         <div class="form-group">
             <input class="btn btn-primary" type="submit" name="submit" value="Create Item">
         </div>
-
 
     </form>

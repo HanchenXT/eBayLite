@@ -16,33 +16,19 @@
                         Welcome to Admin
                         <small>Author</small>
                     </h1>
-<?php
-    if(isset($_GET['source'])){
-        $source = $_GET['source'];
-        
-    } else {
-        $source ='';
-    }
-    switch($source){
-//            case 'add_item';
-//            include "includes/add_item.php";
-//            break;
-//            
-//            case 'edit_item';
-//            include "includes/edit_item.php";
-//            break;
-//            
-//            case 'edit_item_success';
-//            include  "includes/edit_item_success.php";
-//            break;
-            
-        default:
-            include "includes/view_all_comments.php";
-            break;
-    }
-    
-    
-    ?>
+                    <?php
+                    if(isset($_GET['source'])){
+                        $source = $_GET['source'];
+
+                    } else {
+                        $source ='';
+                    }
+                    switch($source){  
+                        default:
+                            include "includes/view_all_comments.php";
+                            break;
+                    }
+                    ?>
 
                 </div>
             </div>

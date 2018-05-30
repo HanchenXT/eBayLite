@@ -48,7 +48,7 @@ if(isset($_POST['register'])){
       // if we need password encrypt, uncomment this
       //$password = password_hash( $password, PASSWORD_BCRYPT, array('cost' => 12));
       
-      $query = "INSERT INTO `user`(`user_name`,`password`,`first_name`, `last_name`) ";
+      $query = "INSERT INTO `User`(`user_name`,`password`,`first_name`, `last_name`) ";
 
       $query .= "VALUES('{$user_name}','{$password}','{$user_firstname}','{$user_lastname}') "; 
 
@@ -86,7 +86,7 @@ if(isset($_POST['cancel'])){
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
                 <h1 class="page-header">
-                    Welcome to GTBay
+                    Welcome to eBayLite
                     <small>Registration</small>
                 </h1>
                     <form role="form" action="" method="post" id="login-form" autocomplete="off">
@@ -127,7 +127,7 @@ if(isset($_POST['cancel'])){
                                 }
                             }
                         ?>
-                 
+                    </form>
                 </div>
             </div> <!-- /.col-xs-12 -->
         </div> <!-- /.row -->

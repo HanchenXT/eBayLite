@@ -1,6 +1,6 @@
 <?php include "includes/admin_header.php"?>
 
-    <div id="wrapper">
+<div id="wrapper">
 
         <!-- Navigation -->
        <?php include "includes/admin_navigation.php" ?>
@@ -35,7 +35,7 @@
                                 if($cat_title == "" || empty($cat_title)){
                                     echo"This field chould not be empty";
                                 }else {
-                                    $query = "INSERT INTO category(category_name) ";
+                                    $query = "INSERT INTO Category(category_name) ";
                                     $query .= "VALUE('{$cat_title}')";
                                     
                                     $create_category_query = mysqli_query($connection, $query);
@@ -67,64 +67,40 @@
                                 </thead>
                                 <tbody>
                                 
-                    
+                                <?php 
+                                // FIND ALL CATEGORIES QUERY
+                                $query = "SELECT * FROM Category";
+                                $select_categories = mysqli_query($connection, $query);
 
-<?php // FIND ALL CATEGORIES QUERY
-$query = "SELECT * FROM category";
-$select_categories = mysqli_query($connection, $query);
-                                    
-                                    
-while($row = mysqli_fetch_assoc($select_categories)){
-$cat_id = $row['categoryID'];
-$cat_name = $row['category_name'];
+                                while($row = mysqli_fetch_assoc($select_categories)){
+                                    $cat_id = $row['categoryID'];
+                                    $cat_name = $row['category_name'];
 
-echo "<tr>";
-echo "<td>{$cat_id}</td>";
-echo "<td>{$cat_name}</td>";
-echo "<td><a href = 'categories.php?delete={$cat_id}'> Delete </a></td>";
-echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>{$cat_id}</td>";
+                                    echo "<td>{$cat_name}</td>";
+                                    echo "<td><a href = 'categories.php?delete={$cat_id}'> Delete </a></td>";
+                                    echo "</tr>";
 
-}
+                                }
 
-
-?>
-                               
-                               
-<?php 
- //DELETE QUERY
-  if(isset($_GET['delete'])){
-      $the_cat_id = $_GET['delete'];
-      $query = "DELETE FROM category WHERE categoryID = {$the_cat_id} ";
-      $delete_query = mysqli_query($connection, $query);
-      header('Location: categories.php'); 
-      
-          
-  }
-?>
-                                    
+                                //DELETE QUERY
+                                if(isset($_GET['delete'])){
+                                    $the_cat_id = $_GET['delete'];
+                                    $query = "DELETE FROM Category WHERE categoryID = {$the_cat_id} ";
+                                    $delete_query = mysqli_query($connection, $query);
+                                    header('Location: categories.php'); 
+                                }
+                                ?>                               
                                 </tbody>
                             </table>
-                            
-                            
                         </div>
-<!--
-                        
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
-                        </ol>
--->
                     </div>
                 </div>
                 <!-- /.row -->
-
             </div>
             <!-- /.container-fluid -->
-
         </div>
-   <?php include "includes/admin_footer.php" ?>
+    <?php include "includes/admin_footer.php" ?>
+</div>
 

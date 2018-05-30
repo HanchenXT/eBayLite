@@ -18,7 +18,7 @@ if(isset($_SESSION['get_it_now_error'])){
     $_SESSION['get_it_now_error'] = array();
 }
 // item info from database
-$query = "SELECT * FROM items WHERE itemID ={$item_id}";
+$query = "SELECT * FROM Items WHERE itemID ={$item_id}";
 $select_items_by_id = mysqli_query($connection, $query);  
 while($row = mysqli_fetch_assoc($select_items_by_id)){
     
@@ -38,7 +38,7 @@ while($row = mysqli_fetch_assoc($select_items_by_id)){
 if (isset($_POST['bid'])){
 
     // reload item info from database
-    $query = "SELECT * FROM items WHERE itemID ={$item_id}";
+    $query = "SELECT * FROM Items WHERE itemID ={$item_id}";
     $select_items_by_id = mysqli_query($connection, $query);  
     while($row = mysqli_fetch_assoc($select_items_by_id)){
         
@@ -93,7 +93,7 @@ if (isset($_POST['bid'])){
     
 
     if (empty($bid_error)) {
-        $query = "INSERT INTO `bid`(`itemID`,`userID`, `bid_amount`,`bid_date`) ";
+        $query = "INSERT INTO `Bid`(`itemID`,`userID`, `bid_amount`,`bid_date`) ";
         $query .= "VALUES('{$item_id}','{$_SESSION['userID']}','{$bid_amount}','{$cur_time}')" ; 
         $create_bid_query = mysqli_query($connection, $query);  
         confirmQuery($create_bid_query);
@@ -192,11 +192,11 @@ if (isset($_POST['get_it_now'])) {
 
                     <?php 
                     
-                    $query = "SELECT userID FROM soldby WHERE itemID = $item_id";
+                    $query = "SELECT userID FROM Soldby WHERE itemID = $item_id";
                     $select_user_id = mysqli_query($connection, $query); 
                     
 
-                    $query = "SELECT * FROM category WHERE categoryID = '{$item_category}'";
+                    $query = "SELECT * FROM Category WHERE categoryID = '{$item_category}'";
                     $select_categories = mysqli_query($connection,$query);
                     $row = mysqli_fetch_assoc($select_categories);
                     $category_name = $row['category_name'];
@@ -331,11 +331,11 @@ if (isset($_POST['get_it_now'])) {
                 <input name="bid_amount" type="number" step="1" class="form-control" value = "<?php echo $minimum_bid + 1?>" required>
                    
                    <button name = "bid" class="btn btn-default" type="submit">
-                          <span class="glyphicon glyphicon-blackboard"> Bid</span>
+                          <span class="glyphicon glyphicon-blackboard"> Bid </span>
                    </button>
                    
                    <button formaction="./search.php" name = "back-to-search" class="btn btn-default" type="submit">
-                          <span class="glyphicon glyphicon-blackboard"> Back</span>
+                          <span class="glyphicon glyphicon-blackboard"> Back </span>
                 </button>
                 </span>
                 </form>

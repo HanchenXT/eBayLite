@@ -2,9 +2,7 @@
 include "./admin/includes/functions.php";
 include "includes/db.php";
 include "includes/header.php";
-?>
 
-<?php
 checkLogged('home.php');
 
 if(isset($_SESSION['login_error'])){
@@ -23,8 +21,8 @@ if (isset($_POST['register'])) {
 }                            
 ?>
    
-    <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
     
 <section id="login">
     <div class="container">
@@ -32,7 +30,7 @@ if (isset($_POST['register'])) {
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
                         <h1 class="page-header">
-                            Welcome to GTBay
+                            Welcome to eBayLite
                             <small>Login</small>
                         </h1>
                         <form action="" method="post">
@@ -67,12 +65,11 @@ if (isset($_POST['register'])) {
                               echo $_SESSION['login_error'];
                            }
                            ?>
-                 
                 </div>
             </div> <!-- /.col-xs-12 -->
         </div> <!-- /.row -->
     </div> <!-- /.container -->
 </section>
-
+</div>
 <hr>
 <?php include "includes/footer.php" ?>

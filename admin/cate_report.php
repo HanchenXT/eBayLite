@@ -13,7 +13,7 @@
                 <div class="row">
                     
                     <h1 class="page-header">
-                        GTBay Category Report
+                        eBayLite Category Report
                     </h1>
                     
                     <table class = "table table-bordered table-hover">
